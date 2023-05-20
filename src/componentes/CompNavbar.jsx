@@ -29,7 +29,7 @@ const CompNavbar = ({ peliculaList }) => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary col-xs-12 col-9">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           Biblio<strong>CUC</strong> 
