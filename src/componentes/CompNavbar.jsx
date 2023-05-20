@@ -54,7 +54,7 @@ const CompNavbar = ({ peliculaList }) => {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-                Link
+                Iniciar Sesion
               </a>
             </li>
             <li className="nav-item dropdown">
