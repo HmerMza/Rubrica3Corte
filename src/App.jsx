@@ -11,7 +11,7 @@ function App() {
   })
   return (
     <>
-      <div className='head' style={{width:'80%', margin:'auto'}} >
+      <div className='head'>
         <CompNavbar peliculaList={listPeliculas}/>
       </div>
       <div className='main'>
