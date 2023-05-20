@@ -29,7 +29,7 @@ const CompNavbar = ({ peliculaList }) => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary col-xs-12 col-9">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary col-12 col-md-11 col-lg-10  m-auto">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           Biblio<strong>CUC</strong> 
@@ -48,43 +48,28 @@ const CompNavbar = ({ peliculaList }) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
-                Home
-              </a>
+              <a className="nav-link active" aria-current="page" href="/"> Home </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Iniciar Sesion
-              </a>
+              <a className="nav-link" href="/login">Iniciar Sesion</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="/libros">Libros </a>
             </li>
             <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
+              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Action
-                  </a>
+                  <a className="dropdown-item" href="#">Action</a>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Another action
-                  </a>
+                  <a className="dropdown-item" href="#">Another action</a>
                 </li>
                 <li>
-                  <hr className="dropdown-divider" />
+                  <hr className="dropdown-divider"/>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
+                  <a className="dropdown-item" href="#">Something else here</a>
                 </li>
               </ul>
             </li>

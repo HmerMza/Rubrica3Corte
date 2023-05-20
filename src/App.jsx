@@ -1,26 +1,18 @@
 
 import './App.css'
-import CardBootstrap from './componentes/CardBootstrap'
+import CompCarrousel from './componentes/CompCarrousel'
 import CompNavbar from './componentes/CompNavbar'
 import listPeliculas from './data/listPeliculas'
 
 function App() {
-  const peliculalist = listPeliculas.map(p => {
-    return <CardBootstrap title={p.name} image={p.image} description={p.description} />
-    
-  })
   return (
     <>
-      <div className='head'>
+      <div className='head col-12'>
         <CompNavbar peliculaList={listPeliculas}/>
       </div>
       <div className='main'>
-        <div className="container">
-          {peliculalist}
-          
-        </div>
+        <CompCarrousel/>
       </div>
-      
     </>
   )
 }
