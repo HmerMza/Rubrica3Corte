@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 const CompNavbar = ({ peliculaList }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -31,18 +32,9 @@ const CompNavbar = ({ peliculaList }) => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary col-12 col-md-11 col-lg-10  m-auto">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
-          Biblio<strong>CUC</strong> 
-        </a>
+        <Link to={"/libros"} className='text-decoration-none'><a className="navbar-brand" href="#">Biblio<strong>CUC</strong> </a></Link>
         <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
