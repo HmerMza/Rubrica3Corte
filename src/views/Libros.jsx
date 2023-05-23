@@ -4,6 +4,9 @@ import CardBootstrap from "../componentes/CardBootstrap";
 import CompNavbar from "../componentes/CompNavbar";
 import { Link, useNavigate } from "react-router-dom";
 import { firebase } from "../data/firebase";
+import { Button, Icon } from "@mui/material";
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import DeleteIcon from "@mui/icons-material/Delete";
 const Libros = () => {
   const [listPeliculas, setListPeliculas] = useState([]);
   const history = useNavigate();
@@ -33,18 +36,37 @@ const Libros = () => {
       <div className="main">
         <div
           style={{
-            width: "100%",
+            width: "80%",
+            margin: "auto",
+            marginTop: "15px",
             height: 50,
             display: "flex",
-            justifyContent: "flex-end",
+            alignItems: "flex-end",
+            flexDirection: "column",
           }}
         >
-          <Link
-            to="/register-book"
-            className="btn btn-primary"
-            style={{ marginRight: 30 }}
-          >
-            +
+          <Link to="/register-book">
+            <Button
+              variant="contained"
+              endIcon={<AddCircleRoundedIcon />}
+              className=" mb-2"
+              style={{ backgroundColor: "#6366f1" }}
+            >
+              Agregar Libro
+            </Button>
+          </Link>
+          <Link>
+            <Button
+              variant="outlined"
+              endIcon={<DeleteIcon />}
+              style={{
+                borderColor: "#6366f1",
+                color: "#6366f1",
+              }}
+              className="mb-2"
+            >
+              Eliminar Libro
+            </Button>
           </Link>
         </div>
         <div className="container">

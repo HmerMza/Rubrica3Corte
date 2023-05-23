@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import "./style.css";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
@@ -34,7 +35,10 @@ const CompNavbar = ({ peliculaList }) => {
   }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary col-12 col-md-11 col-lg-10  m-auto">
+    <nav
+      className="navbar navbar-dark navbar-expand-lg col-12 col-md-11 col-lg-10  m-auto"
+      id="nav"
+    >
       <div className="container-fluid">
         <Link
           to={"https://biblioteca.cuc.edu.co/"}
