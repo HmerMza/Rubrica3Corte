@@ -4,8 +4,12 @@ import CompCarrousel from "./componentes/CompCarrousel";
 import CompNavbar from "./componentes/CompNavbar";
 import listPeliculas from "./data/listPeliculas";
 import Probando from "./componentes/Probando";
+import CompList from "./componentes/CompList";
 
 function App() {
+  
+  
+  
   return (
     <>
       <div className="head col-12">

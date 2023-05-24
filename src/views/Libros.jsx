@@ -55,7 +55,7 @@ const Libros = () => {
               Agregar Libro
             </Button>
           </Link>
-          <Link>
+          <Link to="/Eliminar-book">
             <Button
               variant="outlined"
               endIcon={<DeleteIcon />}

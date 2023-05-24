@@ -6,6 +6,7 @@ import Libros from "./views/Libros.jsx";
 import ViewLogin from "./views/ViewLogin.jsx";
 import Register from "./views/Register.jsx";
 import RegisterBook from "./views/RegisterBook.jsx";
+import EliminarLibros from "./views/EliminarLibros.jsx";
 
 const routes = [
   {
@@ -27,6 +28,10 @@ const routes = [
   {
     path: "/register-book",
     element: <RegisterBook />,
+  },
+  {
+    path: "/Eliminar-book",
+    element: <EliminarLibros />,
   },
 ];
 

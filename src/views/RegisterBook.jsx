@@ -4,15 +4,16 @@ import CompNavbar from "../componentes/CompNavbar";
 import listPeliculas from "../data/listPeliculas";
 import { Link, useNavigate } from "react-router-dom";
 import { firebase } from "../data/firebase";
+import { Button } from "@mui/material";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 
 const RegisterBook = () => {
   const history = useNavigate();
   const [form, setForm] = useState({
-    nombre: "El Cuco de Cristal",
-    descripcion:
-      "Sigue a un detective privado en su investigación de un asesinato aparentemente imposible, donde las pistas y los engaños lo llevan a los rincones más oscuros de la mente humana. Suspenso y giros sorprendentes.",
-    imagen:
-      "https://www.penguinlibros.com/es/2484232-home_default/el-cuco-de-cristal.webp",
+    nombre: "",
+    descripcion: "",
+    imagen: "",
     fecha: "",
     estado: true,
     autor: "",
@@ -68,7 +69,7 @@ const RegisterBook = () => {
                   value={form.nombre}
                   onChange={handelInput}
                   required
-                  placeholder="Ingrese Su nombre"
+                  placeholder="Ingrese el nombre del Libro"
                 />
               </div>
               <div className="mb-3">
@@ -130,12 +131,28 @@ const RegisterBook = () => {
                   placeholder="Ingrese Su Contraseña"
                 />
               </div>
-              <Link to="/libros" className="btn btn-secondary m-2">
-                Atras
+              <Link to="/libros">
+                <Button
+                  variant="outlined"
+                  endIcon={<ArrowBackRoundedIcon />}
+                  style={{
+                    borderColor: "#6366f1",
+                    color: "#6366f1",
+                  }}
+                  className="m-auto me-2 mb-2"
+                >
+                  Atras
+                </Button>
               </Link>
-              <button type="submit" className="btn btn-primary m-2">
+              <Button
+                type="submit"
+                variant="contained"
+                endIcon={<AddCircleRoundedIcon />}
+                className="mb-2 me-2"
+                style={{ backgroundColor: "#6366f1" }}
+              >
                 Registrar
-              </button>
+              </Button>
             </form>
           </div>
         </div>

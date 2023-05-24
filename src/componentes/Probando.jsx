@@ -12,27 +12,22 @@ const Probando = () => {
         spacing={4}
         width="80%"
         margin="auto"
+        marginBottom="5%"
       >
-        <Grid item xs={8} ms={4} md={4} xl={3} lg={4}>
+        <Grid item xs={12} ms={6} md={6} xl={6} lg={6}>
           <Card>
             <CardMedia
               component="img"
-              image="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+              image="https://i.ibb.co/ByBtHV6/Mision.png"
             ></CardMedia>
-            <CardContent>
-              <Typography variant="h5">{"Mision"}</Typography>
-            </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={8} ms={4} md={4} xl={3} lg={4}>
+        <Grid item xs={12} ms={6} md={6} xl={6} lg={6}>
           <Card>
             <CardMedia
               component="img"
-              image="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+              image="https://i.ibb.co/TggHBjp/Vision.png"
             ></CardMedia>
-            <CardContent>
-              <Typography variant="h5">{"Vision"}</Typography>
-            </CardContent>
           </Card>
         </Grid>
       </Grid>
