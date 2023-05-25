@@ -30,7 +30,7 @@ const EliminarLibros = () => {
               className=" mb-2"
               style={{ backgroundColor: "#6366f1" }}
             >
-              Guardar Cambios
+              Atras
             </Button>
           </Link>
         </div>

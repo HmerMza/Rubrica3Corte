@@ -7,7 +7,7 @@ import { firebase } from "../data/firebase";
 import { Button } from "@mui/material";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
-
+import swal from  "sweetalert";
 const RegisterBook = () => {
   const history = useNavigate();
   const [form, setForm] = useState({
@@ -42,6 +42,14 @@ const RegisterBook = () => {
     try {
       const db = firebase.firestore();
       db.collection("libro").add(form);
+      //alerta se registro de libro
+      swal({
+        title: "Libro",
+        text:"El libro fue registrado exitosamente",
+        icon:"success",
+        button :"Aceptar"
+      });
+      history("/libros");
     } catch (error) {
       console.error(error);
     }

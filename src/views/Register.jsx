@@ -6,6 +6,7 @@ import { firebase } from "../data/firebase";
 import { Button } from "@mui/material";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import PersonAddRoundedIcon from "@mui/icons-material/PersonAddRounded";
+import swal from  "sweetalert";
 const Register = () => {
   const history = useNavigate();
   const [form, setForm] = useState({
@@ -31,10 +32,22 @@ const Register = () => {
         .find((item) => item.email === form.email);
       if (user) {
         //alerta EMAIL existe
+        swal({
+          title: "Ya existe",
+          text:"Por favor, debe ingresar otro correo",
+          icon:"error",
+          button :"Aceptar"
+        });
         return;
       }
       db.collection("usuario").add(form);
       //alerta se registro el usuario
+      swal({
+        title: "Confirmación",
+        text:"Usted se encuentra registrado",
+        icon:"success",
+        button :"Aceptar"
+      });
       history("/login");
     } catch (error) {
       console.log(error);
