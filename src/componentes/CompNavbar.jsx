@@ -14,7 +14,7 @@ const CompNavbar = ({ peliculaList }) => {
     setSearchTerm(term);
 
     const results = peliculaList.filter((pelicula) =>
-      pelicula.name.toLowerCase().includes(term.toLowerCase())
+      pelicula.nombre.toLowerCase().includes(term.toLowerCase())
     );
     setSearchResults(results);
   };
@@ -106,7 +106,7 @@ const CompNavbar = ({ peliculaList }) => {
                   {searchResults.map((pelicula, index) => (
                     <li key={index}>
                       <a className="dropdown-item" href="#">
-                        {pelicula.name}
+                        {pelicula.nombre}
                       </a>
                     </li>
                   ))}
