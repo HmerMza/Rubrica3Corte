@@ -3,6 +3,9 @@ import CompNavbar from "../componentes/CompNavbar";
 import listPeliculas from "../data/listPeliculas";
 import { Link, useNavigate } from "react-router-dom";
 import { firebase } from "../data/firebase";
+import { Button } from "@mui/material";
+import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
+import PersonAddRoundedIcon from "@mui/icons-material/PersonAddRounded";
 const Register = () => {
   const history = useNavigate();
   const [form, setForm] = useState({
@@ -46,7 +49,11 @@ const Register = () => {
       <div className="main">
         <div className="container">
           <div className="container mt-5">
-            <form onSubmit={onSubmit}>
+            <form
+              onSubmit={onSubmit}
+              className="p-3 rounded-2 border border-2 col-10"
+              style={{ maxWidth: "410px" }}
+            >
               <h2>Registro</h2>
               <hr className="dropdown-divider" />
               <div className="mb-3">
@@ -109,12 +116,28 @@ const Register = () => {
                   placeholder="Ingrese Su Contraseña"
                 />
               </div>
-              <Link to="/login" className="btn btn-secondary m-2">
-                Atras
+              <Link to="/login">
+                <Button
+                  variant="outlined"
+                  endIcon={<ArrowBackRoundedIcon />}
+                  style={{
+                    borderColor: "#6366f1",
+                    color: "#6366f1",
+                  }}
+                  className="m-auto me-2 mb-2"
+                >
+                  Atras
+                </Button>
               </Link>
-              <button type="submit" className="btn btn-primary m-2">
+              <Button
+                type="submit"
+                variant="contained"
+                endIcon={<PersonAddRoundedIcon />}
+                className="mb-2 me-2"
+                style={{ backgroundColor: "#6366f1" }}
+              >
                 Registrar
-              </button>
+              </Button>
             </form>
           </div>
         </div>

@@ -76,6 +76,8 @@ const Libros = () => {
               title={p.nombre}
               image={p.imagen}
               description={p.descripcion}
+              autor={p.autor}
+              anho={p.fecha}
             />
           ))}
         </div>

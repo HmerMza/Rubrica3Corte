@@ -53,8 +53,11 @@ const RegisterBook = () => {
       </div>
       <div className="main">
         <div className="container">
-          <div className="container mt-5">
-            <form onSubmit={onSubmit}>
+          <div className="container mt-5 ">
+            <form
+              onSubmit={onSubmit}
+              className=" p-3 rounded-2 border border-2"
+            >
               <h2>Registro</h2>
               <hr className="dropdown-divider" />
               <div className="mb-3">

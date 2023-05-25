@@ -11,25 +11,30 @@ const EliminarLibros = () => {
     <CompList title={libro.name} autor={libro.autor} />
   ));
   return (
-    <div
-      style={{
-        width: "90%",
-        margin: "auto",
-        textAlign: "center",
-      }}
-    >
+    <div>
       <CompNavbar />
-      <div style={{ marginBottom: "1%", marginTop: "3%" }}>{libos}</div>
-      <Link to="/libros">
-        <Button
-          variant="contained"
-          endIcon={<CheckCircleOutlineRoundedIcon />}
-          className=" mb-2"
-          style={{ backgroundColor: "#6366f1" }}
-        >
-          Guardar Cambios
-        </Button>
-      </Link>
+      <div
+        style={{
+          width: "90%",
+          margin: "auto",
+          marginTop: "2%",
+          textAlign: "center",
+        }}
+      >
+        {libos}
+        <div className=" mt-3">
+          <Link to="/libros">
+            <Button
+              variant="contained"
+              endIcon={<CheckCircleOutlineRoundedIcon />}
+              className=" mb-2"
+              style={{ backgroundColor: "#6366f1" }}
+            >
+              Guardar Cambios
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

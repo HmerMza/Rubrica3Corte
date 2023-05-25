@@ -5,6 +5,8 @@ const CardBootstrap = ({
   title = "Titulo por defecto",
   image = "descripcion",
   description = "holamundo",
+  autor = "autor",
+  anho = "anho de publicacion",
 }) => {
   const [show, setShow] = useState(true);
 
@@ -19,9 +21,17 @@ const CardBootstrap = ({
           {show ? (
             <img src={image} className="card-img-top" alt="..." />
           ) : (
-            <p className="card-text m-4">
-              <h3 className=" mt-4">Resumen</h3> {description}
-            </p>
+            <>
+              <p className="card-text m-4">
+                <h3 className=" mt-4">Resumen</h3> {description}
+              </p>
+              <p className="card-text m-4">
+                <h4 className=" mt-4">Autor</h4> {autor}
+              </p>
+              <p className="card-text m-4">
+                <h4 className=" mt-4">Año</h4> {anho}
+              </p>
+            </>
           )}
         </div>
         <div className="card-body" style={{ height: "102px" }}>
