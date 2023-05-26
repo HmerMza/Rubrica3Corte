@@ -2,6 +2,8 @@
 import "./style.css";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
+import { IconButton, List, ListItem, ListItemText } from "@mui/material";
 
 const CompNavbar = ({ peliculaList }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -33,6 +35,12 @@ const CompNavbar = ({ peliculaList }) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  //cerrando sesion
+  const handleLogout = () => {
+    localStorage.removeItem("isSingIn");
+    history("/login"); // Redirige al usuario a la página de inicio de sesión
+  };
 
   return (
     <nav
@@ -78,6 +86,29 @@ const CompNavbar = ({ peliculaList }) => {
                 <Link to={"/login"} className="text-decoration-none">
                   <a className="nav-link">Iniciar Sesion</a>
                 </Link>
+              </li>
+            )}
+            {isSingIn && (
+              <li className="nav-item dropdown">
+                <a
+                  href=""
+                  className=" nav-link dropdown-toggle"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Hola, Usuario
+                </a>
+                <ul className=" dropdown-menu">
+                  <Link to={"/login"} style={{ textDecoration: "none" }}>
+                    <li className=" dropdown-item" onClick={handleLogout}>
+                      Cerrar Sesion
+                      <IconButton>
+                        <ExitToAppRoundedIcon />
+                      </IconButton>
+                    </li>
+                  </Link>
+                </ul>
               </li>
             )}
           </ul>

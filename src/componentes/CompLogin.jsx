@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { firebase } from "../data/firebase";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import HowToRegRoundedIcon from "@mui/icons-material/HowToRegRounded";
+
 const CompLogin = () => {
   const history = useNavigate();
   const [email, setEmail] = useState("");

@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { firebase } from "../data/firebase";
 import { Button, Icon } from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 import DeleteIcon from "@mui/icons-material/Delete";
 const Libros = () => {
   const [listPeliculas, setListPeliculas] = useState([]);
@@ -28,6 +29,7 @@ const Libros = () => {
       getBooks();
     }
   }, []);
+
   return (
     <>
       <div className="head col-12">
