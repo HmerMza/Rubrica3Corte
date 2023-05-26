@@ -9,12 +9,57 @@ import {
 import ModeEditOutlineRoundedIcon from "@mui/icons-material/ModeEditOutlineRounded";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import { firebase } from "../data/firebase";
+import { useEffect, useState } from "react";
+import swal from "sweetalert";
 
-const CompList = ({ title, autor }) => {
+const CompList = ({ title, autor, id }) => {
   const Demo = styled("div")(({ theme }) => ({
     backgroundColor: "white",
   }));
+  //Traigo la Base de Datos
+  const [listPeliculas, setListPeliculas] = useState([]);
+  const [deletedItemId, setDeletedItemId] = useState(null);
+  useEffect(() => {
+    const getBooks = async () => {
+      try {
+        const db = firebase.firestore();
+        const data = await db.collection("libro").get();
+        const result = data.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        setListPeliculas(result);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getBooks();
+  }, []);
+  //elimino el elemento
+  useEffect(() => {
+    const deleteItem = async () => {
+      if (deletedItemId) {
+        try {
+          const db = firebase.firestore();
+          await db.collection("libro").doc(deletedItemId).delete();
+          setDeletedItemId(null);
+          // Actualizar la lista de películas después de eliminar
+          const updatedList = listPeliculas.filter(
+            (item) => item.id !== deletedItemId
+          );
+          setListPeliculas(updatedList);
+          swal({
+            title: "Libro",
+            text: "El libro fue eliminado exitosamente",
+            icon: "success",
+            button: "Aceptar",
+          });
+          history("/Eliminar-Book");
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    deleteItem();
+  }, [deletedItemId]);
   return (
     <div>
       <Box
@@ -30,10 +75,14 @@ const CompList = ({ title, autor }) => {
               <ListItem
                 secondaryAction={
                   <>
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton edge="end" aria-label="editar">
                       <ModeEditOutlineRoundedIcon />
                     </IconButton>
-                    <IconButton edge="end" aria-label="delete">
+                    <IconButton
+                      edge="end"
+                      aria-label="delete"
+                      onClick={() => setDeletedItemId(id)}
+                    >
                       <DeleteIcon />
                     </IconButton>
                   </>
