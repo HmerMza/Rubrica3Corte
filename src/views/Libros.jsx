@@ -9,6 +9,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const Libros = ({ listPeliculas = [], firebaseUser, dataUser }) => {
   return (
     <div className="main">
+      {dataUser.nombre}
       <div
         style={{
           width: "80%",
