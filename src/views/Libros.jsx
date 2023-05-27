@@ -9,7 +9,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const Libros = ({ listPeliculas = [], firebaseUser, dataUser }) => {
   return (
     <div className="main">
-      {dataUser.nombre}
+<<<<<<< HEAD
+      
       <div
         style={{
           width: "80%",
@@ -46,6 +47,47 @@ const Libros = ({ listPeliculas = [], firebaseUser, dataUser }) => {
           </Button>
         </Link>
       </div>
+=======
+      {dataUser.admin && (
+        <div
+          style={{
+            width: "80%",
+            margin: "auto",
+            marginTop: "15px",
+            height: 50,
+            display: "flex",
+            alignItems: "flex-end",
+            flexDirection: "column",
+          }}
+        >
+          <Link to="/register-book">
+            <Button
+              variant="contained"
+              endIcon={<AddCircleRoundedIcon />}
+              className=" mb-2"
+              style={{ backgroundColor: "#6366f1", width: 206 }}
+            >
+              Agregar Libro
+            </Button>
+          </Link>
+          <Link to="/Eliminar-book">
+            <Button
+              variant="outlined"
+              endIcon={<DeleteIcon />}
+              style={{
+                borderColor: "#6366f1",
+                color: "#6366f1",
+                width: 206,
+              }}
+              className="mb-2"
+            >
+              Invetario de Libros
+            </Button>
+          </Link>
+        </div>
+      )}
+
+>>>>>>> cf9e38ad81b75562124c6493fb9c46e478f57bd2
       <div className="container">
         {firebaseUser &&
           listPeliculas.map((p) => (

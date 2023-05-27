@@ -75,14 +75,6 @@ function App() {
       path: "/register",
       element: <Register />,
     },
-    {
-      path: "/register-book",
-      element: <RegisterBook />,
-    },
-    {
-      path: "/Eliminar-book",
-      element: <EliminarLibros />,
-    },
   ];
   return (
     <BrowserRouter>
@@ -101,6 +93,16 @@ function App() {
             element={screen.element}
           />
         ))}
+        {dataUser.admin && (
+          <>
+            <Route path="/register-book" element={<RegisterBook />} />
+            <Route path="/eliminar-book" element={<EliminarLibros />} />
+          </>
+        )}
+        {/* 
+        agrega una vista para las controlar las rutas inexistente como un error 404
+        <Route path="*" element={<EliminarLibros />} /> 
+        */}
       </Routes>
     </BrowserRouter>
   );
