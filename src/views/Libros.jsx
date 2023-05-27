@@ -25,7 +25,7 @@ const Libros = ({ listPeliculas = [], firebaseUser, dataUser }) => {
             variant="contained"
             endIcon={<AddCircleRoundedIcon />}
             className=" mb-2"
-            style={{ backgroundColor: "#6366f1" }}
+            style={{ backgroundColor: "#6366f1", width: 206 }}
           >
             Agregar Libro
           </Button>
@@ -37,10 +37,11 @@ const Libros = ({ listPeliculas = [], firebaseUser, dataUser }) => {
             style={{
               borderColor: "#6366f1",
               color: "#6366f1",
+              width: 206,
             }}
             className="mb-2"
           >
-            Eliminar Libro
+            Invetario de Libros
           </Button>
         </Link>
       </div>
