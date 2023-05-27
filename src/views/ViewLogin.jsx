@@ -1,19 +1,13 @@
-import CompNavbar from "../componentes/CompNavbar";
-import listPeliculas from "../data/listPeliculas";
+/* eslint-disable react/prop-types */
 import CompLogin from "../componentes/CompLogin";
 
 const ViewLogin = () => {
   return (
-    <>
-      <div className="head col-12">
-        <CompNavbar peliculaList={listPeliculas} />
+    <div className="main">
+      <div className="container">
+        <CompLogin />
       </div>
-      <div className="main">
-        <div className="container">
-          <CompLogin />
-        </div>
-      </div>
-    </>
+    </div>
   );
 };
 

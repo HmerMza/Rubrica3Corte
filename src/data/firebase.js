@@ -1,6 +1,6 @@
-// Import the functions you need from the SDKs you need
-import firebase from "firebase/app";
-import 'firebase/firestore'
+import { initializeApp } from "firebase/app";
+import { getFirestore } from 'firebase/firestore'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -11,9 +11,11 @@ const firebaseConfig = {
   projectId: "rubrica-3-5ac55",
   storageBucket: "rubrica-3-5ac55.appspot.com",
   messagingSenderId: "1023954151083",
-  appId: "1:1023954151083:web:76ba6042530924217fb9ee"
+  appId: "1:1023954151083:web:76ba6042530924217fb9ee",
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-export {firebase};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth();
+export { db, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword };

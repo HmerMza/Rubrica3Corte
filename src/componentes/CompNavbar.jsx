@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
 import "./style.css";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
-import { IconButton, List, ListItem, ListItemText } from "@mui/material";
+import { IconButton } from "@mui/material";
+import { auth } from "../data/firebase";
 
-const CompNavbar = ({ peliculaList }) => {
+const CompNavbar = ({ peliculaList, isSingIn, setIsSingIn }) => {
+  const histoy = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [isSingIn, setIsSingIn] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const searchRef = useRef(null);
-
   const handleSearch = (event) => {
     const term = event.target.value;
     setSearchTerm(term);
@@ -29,8 +29,6 @@ const CompNavbar = ({ peliculaList }) => {
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
-    const data = localStorage.getItem("isSingIn");
-    setIsSingIn(data === "true");
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
@@ -38,8 +36,10 @@ const CompNavbar = ({ peliculaList }) => {
 
   //cerrando sesion
   const handleLogout = () => {
-    localStorage.removeItem("isSingIn");
-    history("/login"); // Redirige al usuario a la página de inicio de sesión
+    auth.signOut().then(() => {
+      setIsSingIn(false);
+      histoy("/login");
+    }); // Redirige al usuario a la página de inicio de sesión
   };
 
   return (
@@ -112,39 +112,41 @@ const CompNavbar = ({ peliculaList }) => {
               </li>
             )}
           </ul>
-          <form className="d-flex">
-            <div ref={searchRef} className="position-relative">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                value={searchTerm}
-                onChange={handleSearch}
-              />
-              {searchResults.length > 0 && (
-                <ul
-                  className="dropdown-menu"
-                  style={{
-                    display: "block",
-                    position: "absolute",
-                    top: "100%",
-                    left: 0,
-                    zIndex: 1000,
-                    minWidth: "100%",
-                  }}
-                >
-                  {searchResults.map((pelicula, index) => (
-                    <li key={index}>
-                      <a className="dropdown-item" href="#">
-                        {pelicula.nombre}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </form>
+          {isSingIn && (
+            <form className="d-flex">
+              <div ref={searchRef} className="position-relative">
+                <input
+                  className="form-control me-2"
+                  type="search"
+                  placeholder="Buscar"
+                  aria-label="Search"
+                  value={searchTerm}
+                  onChange={handleSearch}
+                />
+                {searchResults.length > 0 && (
+                  <ul
+                    className="dropdown-menu"
+                    style={{
+                      display: "block",
+                      position: "absolute",
+                      top: "100%",
+                      left: 0,
+                      zIndex: 1000,
+                      minWidth: "100%",
+                    }}
+                  >
+                    {searchResults.map((pelicula, index) => (
+                      <li key={index}>
+                        <a className="dropdown-item" href="#">
+                          {pelicula.nombre}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </nav>

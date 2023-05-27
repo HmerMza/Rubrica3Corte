@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
+import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { firebase } from "../data/firebase";
+import { auth, signInWithEmailAndPassword } from "../data/firebase";
 import { Button } from "@mui/material";
 import HowToRegRoundedIcon from "@mui/icons-material/HowToRegRounded";
 
@@ -8,6 +10,7 @@ const CompLogin = () => {
   const history = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -19,36 +22,34 @@ const CompLogin = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const db = firebase.firestore();
-      const data = await db.collection("usuario").get();
-      const user = data.docs
-        .map((doc) => ({ id: doc.id, ...doc.data() }))
-        .find((item) => item.email === email);
-      if (user) {
-        if (user.contrasena === password) {
-          localStorage.setItem("isSingIn", true);
-          history("/libros");
-        } else {
-          console.log("contraseña incorrecta");
-          // agregar alerta de contraseña incorrecta
-        }
-      } else {
-        console.log("usuario no registrado");
-        // agregar alerta de usuario no registrado
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    //
-    setEmail("");
-    setPassword("");
+    login();
   };
-  useEffect(() => {
-    const isSingIn = localStorage.getItem("isSingIn");
-    if (isSingIn === "true") {
+
+  const login = useCallback(async () => {
+    try {
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      console.log(res.user);
+      setEmail("");
+      setPassword("");
+      setError("");
       history("/libros");
+    } catch (err) {
+      console.log(err);
+      if (err.code === "auth/user-not-found") {
+        setError("Usuario no se encuentra registrado");
+      }
+      if (error.code === "auth/wrong-password") {
+        setError("contraseña no valida");
+      }
     }
+  }, [email, password, history]);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        history("/libros");
+      }
+    });
   }, []);
 
   return (
@@ -101,7 +102,7 @@ const CompLogin = () => {
             Login
           </Button>
           <Link to="/register" className="m-2">
-            Aun no Tienes Cuenta?
+            ¿Aun no tienes cuenta?
           </Link>
         </div>
       </form>
