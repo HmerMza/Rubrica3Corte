@@ -13,7 +13,8 @@ import { collection, onSnapshot } from "firebase/firestore";
 
 function App() {
   const [listPeliculas, setListPeliculas] = useState([]);
-  const [isSingIn, setIsSingIn] = useState(false);
+  const [isSingIn, setIsSingIn] = useState();
+  const [dataUser, setDataUser] = useState({});
 
   useEffect(() => {
     const getBooks = async () => {
@@ -29,13 +30,27 @@ function App() {
     };
     auth.onAuthStateChanged((user) => {
       if (user) {
-        setIsSingIn(user);
+        setIsSingIn(user.uid);
       } else {
         setIsSingIn(null);
       }
     });
     getBooks();
   }, []);
+
+  useEffect(() => {
+    const getUser = async () => {
+      await onSnapshot(collection(db, "usuario"), (query) => {
+        const data = query.docs
+          .map((doc) => ({ id: doc.id, ...doc.data() }))
+          .find((user) => user.id === isSingIn);
+        setDataUser(data);
+      });
+    };
+    if (isSingIn) {
+      getUser();
+    }
+  }, [isSingIn]);
 
   const routes = [
     {
@@ -44,7 +59,13 @@ function App() {
     },
     {
       path: "/libros",
-      element: <Libros listPeliculas={listPeliculas} firebaseUser={isSingIn} />,
+      element: (
+        <Libros
+          listPeliculas={listPeliculas}
+          firebaseUser={isSingIn}
+          dataUser={dataUser}
+        />
+      ),
     },
     {
       path: "/login",

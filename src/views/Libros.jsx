@@ -6,7 +6,7 @@ import { Button } from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const Libros = ({ listPeliculas = [], firebaseUser }) => {
+const Libros = ({ listPeliculas = [], firebaseUser, dataUser }) => {
   return (
     <div className="main">
       <div
