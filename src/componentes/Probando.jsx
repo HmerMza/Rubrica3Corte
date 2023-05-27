@@ -1,15 +1,14 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { Card, CardMedia, Grid } from "@mui/material";
 const Probando = () => {
   return (
-    <div style={{ my: 3 }} className=" mt-5">
+    <div className="mt-5">
       {" "}
       <Grid
         container
         direction="row"
         justifyContent="center"
         alignItems="center"
-        spacing={4}
         width="80%"
         margin="auto"
         marginBottom="5%"

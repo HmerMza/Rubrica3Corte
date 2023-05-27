@@ -14,6 +14,7 @@ const Register = () => {
     apellido: "",
     email: "",
     contrasena: "",
+    L_Prestados: [],
   });
   const handelInput = (e) => {
     setForm({

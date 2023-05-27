@@ -13,7 +13,7 @@ import { firebase } from "../data/firebase";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
 
-const CompList = ({ title, autor, id }) => {
+const CompList = () => {
   const Demo = styled("div")(({ theme }) => ({
     backgroundColor: "white",
   }));
@@ -47,7 +47,7 @@ const CompList = ({ title, autor, id }) => {
           );
           setListPeliculas(updatedList);
           swal({
-            title: "Libro",
+            title: "Eliminar Libro",
             text: "El libro fue eliminado exitosamente",
             icon: "success",
             button: "Aceptar",
@@ -72,24 +72,30 @@ const CompList = ({ title, autor, id }) => {
         <Grid item xs={12} md={4}>
           <Demo>
             <List margin={"auto"} ma>
-              <ListItem
-                secondaryAction={
-                  <>
-                    <IconButton edge="end" aria-label="editar">
-                      <ModeEditOutlineRoundedIcon />
-                    </IconButton>
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() => setDeletedItemId(id)}
-                    >
-                      <DeleteIcon />
-                    </IconButton>
-                  </>
-                }
-              >
-                <ListItemText primary={title} secondary={autor} />
-              </ListItem>
+              {listPeliculas.map((libro, index) => (
+                <ListItem
+                  key={index}
+                  secondaryAction={
+                    <>
+                      <IconButton edge="end" aria-label="editar">
+                        <ModeEditOutlineRoundedIcon />
+                      </IconButton>
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => setDeletedItemId(libro.id)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </>
+                  }
+                >
+                  <ListItemText
+                    primary={libro.nombre}
+                    secondary={libro.autor}
+                  />
+                </ListItem>
+              ))}
             </List>
           </Demo>
         </Grid>

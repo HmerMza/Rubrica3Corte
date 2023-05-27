@@ -21,12 +21,10 @@ const EliminarLibros = () => {
     };
     getBooks();
   }, []);
-  const libos = listPeliculas.map((libro) => (
-    <CompList title={libro.nombre} autor={libro.autor} id={libro.id} />
-  ));
+  
   return (
     <div>
-      <CompNavbar />
+      <CompNavbar peliculaList={listPeliculas} />
       <div
         style={{
           width: "90%",
@@ -35,7 +33,7 @@ const EliminarLibros = () => {
           textAlign: "center",
         }}
       >
-        {libos}
+        <CompList />
         <div className=" mt-3">
           <Link to="/libros">
             <Button
