@@ -3,6 +3,7 @@ import CompNavbar from "./componentes/CompNavbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Libros from "./views/Libros.jsx";
 import ViewLogin from "./views/ViewLogin.jsx";
+import Home from "./views/Home";
 import Register from "./views/Register.jsx";
 import RegisterBook from "./views/RegisterBook.jsx";
 import EliminarLibros from "./views/EliminarLibros.jsx";
@@ -39,7 +40,7 @@ function App() {
   const routes = [
     {
       path: "/",
-      element: <App />,
+      element: <Home />,
     },
     {
       path: "/libros",
