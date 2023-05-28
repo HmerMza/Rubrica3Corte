@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 
 import { collection, deleteDoc, doc, onSnapshot } from "firebase/firestore";
 import Swal from "sweetalert2";
+import { Form, Link } from "react-router-dom";
 
 const CompList = () => {
   const Demo = styled("div")(() => ({
@@ -76,6 +77,8 @@ const CompList = () => {
       });
     }
   }, [deletedItemId]);
+
+  //editar el elemento
   return (
     <div>
       <Box
@@ -93,9 +96,12 @@ const CompList = () => {
                   key={index}
                   secondaryAction={
                     <>
-                      <IconButton edge="end" aria-label="editar">
-                        <ModeEditOutlineRoundedIcon />
-                      </IconButton>
+                      <Link to={`/edit-libros/${libro.id}`}>
+                        <IconButton edge="end" aria-label="editar">
+                          <ModeEditOutlineRoundedIcon />
+                        </IconButton>
+                      </Link>
+
                       <IconButton
                         edge="end"
                         aria-label="delete"

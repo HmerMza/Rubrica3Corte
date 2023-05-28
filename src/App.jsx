@@ -7,12 +7,14 @@ import Home from "./views/Home";
 import Register from "./views/Register.jsx";
 import RegisterBook from "./views/RegisterBook.jsx";
 import EliminarLibros from "./views/EliminarLibros.jsx";
-import { useEffect, useState } from "react";
+import { Component, useEffect, useState } from "react";
 import { auth, db } from "./data/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
+import EditarLibro from "./views/EditarLibro";
 
 function App() {
   const [listPeliculas, setListPeliculas] = useState([]);
+  const [listPeliculasFilter, setListPeliculasFilter] = useState([]);
   const [isSingIn, setIsSingIn] = useState();
   const [dataUser, setDataUser] = useState({});
 
@@ -61,7 +63,7 @@ function App() {
       path: "/libros",
       element: (
         <Libros
-          listPeliculas={listPeliculas}
+          listPeliculas={listPeliculasFilter}
           firebaseUser={isSingIn}
           dataUser={dataUser}
         />
@@ -75,6 +77,10 @@ function App() {
       path: "/register",
       element: <Register />,
     },
+    {
+      path: "/edit-libros/:libroId",
+      element: <EditarLibro />,
+    },
   ];
   return (
     <BrowserRouter>
@@ -83,6 +89,7 @@ function App() {
           peliculaList={listPeliculas}
           isSingIn={isSingIn}
           setIsSingIn={setIsSingIn}
+          setListPeliculasFilter={setListPeliculasFilter}
           dataUser={dataUser}
         />
       </div>
@@ -101,7 +108,7 @@ function App() {
           </>
         )}
         {/* 
-        agrega una vista para las controlar las rutas inexistente como un error 404
+        agrega una vista para las controlar las rutas inexistente como un error 404 page not found
         <Route path="*" element={<EliminarLibros />} /> 
         */}
       </Routes>
