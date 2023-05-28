@@ -83,6 +83,7 @@ function App() {
           peliculaList={listPeliculas}
           isSingIn={isSingIn}
           setIsSingIn={setIsSingIn}
+          dataUser={dataUser}
         />
       </div>
       <Routes>

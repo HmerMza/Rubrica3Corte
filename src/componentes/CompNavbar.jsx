@@ -6,7 +6,7 @@ import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 import { IconButton } from "@mui/material";
 import { auth } from "../data/firebase";
 
-const CompNavbar = ({ peliculaList, isSingIn, setIsSingIn }) => {
+const CompNavbar = ({ peliculaList, isSingIn, setIsSingIn, dataUser }) => {
   const histoy = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -97,7 +97,7 @@ const CompNavbar = ({ peliculaList, isSingIn, setIsSingIn }) => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Hola, Usuario
+                  Hola, {dataUser.nombre}
                 </a>
                 <ul className=" dropdown-menu">
                   <Link to={"/login"} style={{ textDecoration: "none" }}>
