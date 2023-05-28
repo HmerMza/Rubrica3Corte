@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import "./style.css";
 import { useState, useEffect, useRef } from "react";
@@ -6,32 +7,50 @@ import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
 import { IconButton } from "@mui/material";
 import { auth } from "../data/firebase";
 
-const CompNavbar = ({ peliculaList, isSingIn, setIsSingIn }) => {
+const CompNavbar = ({
+  peliculaList = [],
+  isSingIn,
+  setIsSingIn,
+  setListPeliculasFilter,
+}) => {
   const histoy = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  // const [searchResults, setSearchResults] = useState([]);
   const searchRef = useRef(null);
   const handleSearch = (event) => {
-    const term = event.target.value;
-    setSearchTerm(term);
+    setSearchTerm(event.target.value);
 
-    const results = peliculaList.filter((pelicula) =>
-      pelicula.nombre.toLowerCase().includes(term.toLowerCase())
-    );
-    setSearchResults(results);
-  };
-
-  const handleClickOutside = (event) => {
-    if (searchRef.current && !searchRef.current.contains(event.target)) {
-      setSearchResults([]);
-    }
+    // const results = peliculaList.filter((pelicula) =>
+    //   pelicula.nombre.toLowerCase().includes(term.toLowerCase())
+    // );
+    // setSearchResults(results);
   };
 
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
+    const timeout = setTimeout(() => {
+      const filter = peliculaList.filter((libro) =>
+        libro.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setListPeliculasFilter(filter.length > 0 ? filter : peliculaList);
+      console.log(filter.length > 0 ? filter : peliculaList);
+    }, 1000);
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      clearTimeout(timeout);
     };
+  }, [searchTerm]);
+
+  // const handleClickOutside = (event) => {
+  //   if (searchRef.current && !searchRef.current.contains(event.target)) {
+  //     setSearchResults([]);
+  //   }
+  // };
+
+  useEffect(() => {
+    setListPeliculasFilter(peliculaList);
+    // document.addEventListener("click", handleClickOutside);
+    // return () => {
+    //   document.removeEventListener("click", handleClickOutside);
+    // };
   }, []);
 
   //cerrando sesion
@@ -123,27 +142,29 @@ const CompNavbar = ({ peliculaList, isSingIn, setIsSingIn }) => {
                   value={searchTerm}
                   onChange={handleSearch}
                 />
-                {searchResults.length > 0 && (
-                  <ul
-                    className="dropdown-menu"
-                    style={{
-                      display: "block",
-                      position: "absolute",
-                      top: "100%",
-                      left: 0,
-                      zIndex: 1000,
-                      minWidth: "100%",
-                    }}
-                  >
-                    {searchResults.map((pelicula, index) => (
-                      <li key={index}>
-                        <a className="dropdown-item" href="#">
-                          {pelicula.nombre}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                {
+                  // searchResults.length > 0 && (
+                  //   <ul
+                  //     className="dropdown-menu"
+                  //     style={{
+                  //       display: "block",
+                  //       position: "absolute",
+                  //       top: "100%",
+                  //       left: 0,
+                  //       zIndex: 1000,
+                  //       minWidth: "100%",
+                  //     }}
+                  //   >
+                  //     {searchResults.map((pelicula, index) => (
+                  //       <li key={index}>
+                  //         <a className="dropdown-item" href="#">
+                  //           {pelicula.nombre}
+                  //         </a>
+                  //       </li>
+                  //     ))}
+                  //   </ul>
+                  // )
+                }
               </div>
             </form>
           )}

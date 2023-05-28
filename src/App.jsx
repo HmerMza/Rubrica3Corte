@@ -13,6 +13,7 @@ import { collection, onSnapshot } from "firebase/firestore";
 
 function App() {
   const [listPeliculas, setListPeliculas] = useState([]);
+  const [listPeliculasFilter, setListPeliculasFilter] = useState([]);
   const [isSingIn, setIsSingIn] = useState();
   const [dataUser, setDataUser] = useState({});
 
@@ -61,7 +62,7 @@ function App() {
       path: "/libros",
       element: (
         <Libros
-          listPeliculas={listPeliculas}
+          listPeliculas={listPeliculasFilter}
           firebaseUser={isSingIn}
           dataUser={dataUser}
         />
@@ -83,6 +84,7 @@ function App() {
           peliculaList={listPeliculas}
           isSingIn={isSingIn}
           setIsSingIn={setIsSingIn}
+          setListPeliculasFilter={setListPeliculasFilter}
         />
       </div>
       <Routes>
@@ -100,7 +102,7 @@ function App() {
           </>
         )}
         {/* 
-        agrega una vista para las controlar las rutas inexistente como un error 404
+        agrega una vista para las controlar las rutas inexistente como un error 404 page not found
         <Route path="*" element={<EliminarLibros />} /> 
         */}
       </Routes>
