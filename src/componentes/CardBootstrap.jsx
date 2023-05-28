@@ -1,5 +1,19 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  onSnapshot,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import { db } from "../data/firebase";
 
 const CardBootstrap = ({
   title = "Titulo por defecto",
@@ -7,11 +21,52 @@ const CardBootstrap = ({
   description = "holamundo",
   autor = "autor",
   anho = "anho de publicacion",
+  id = 0,
+  dataUser,
 }) => {
   const [show, setShow] = useState(true);
 
   const ocultar = () => {
     setShow(!show);
+  };
+
+  const prestarLibro = () => {
+    Swal.fire({
+      title: "Seguro que desea Prestar el libro?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si!",
+      cancelButtonText: "No",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const data = { ...dataUser };
+        data.L_Prestados = [...dataUser.L_Prestados, id];
+        const usuariosRef = collection(db, "usuario");
+        const q = query(usuariosRef, where("id", "==", dataUser.id));
+
+        try {
+          const querySnapshot = await getDocs(q);
+
+          if (querySnapshot.empty) {
+            console.log(
+              "No se encontraron documentos que coincidan con la consulta"
+            );
+            return;
+          }
+          querySnapshot.forEach((doc) => {
+            updateDoc(doc.ref, data)
+              .then(() => console.log("Documento actualizado con éxito"))
+              .catch((error) =>
+                console.error("Error al actualizar el documento:", error)
+              );
+          });
+        } catch (error) {
+          console.error("Error al ejecutar la consulta:", error);
+        }
+      }
+    });
   };
 
   return (
@@ -40,6 +95,7 @@ const CardBootstrap = ({
             variant="contained"
             className="m-auto me-2 mb-2"
             style={{ backgroundColor: "#6366f1" }}
+            onClick={prestarLibro}
           >
             Prestar
           </Button>

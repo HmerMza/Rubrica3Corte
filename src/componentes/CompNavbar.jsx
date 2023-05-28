@@ -15,15 +15,9 @@ const CompNavbar = ({
 }) => {
   const histoy = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  // const [searchResults, setSearchResults] = useState([]);
   const searchRef = useRef(null);
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
-
-    // const results = peliculaList.filter((pelicula) =>
-    //   pelicula.nombre.toLowerCase().includes(term.toLowerCase())
-    // );
-    // setSearchResults(results);
   };
 
   useEffect(() => {
@@ -39,18 +33,8 @@ const CompNavbar = ({
     };
   }, [searchTerm]);
 
-  // const handleClickOutside = (event) => {
-  //   if (searchRef.current && !searchRef.current.contains(event.target)) {
-  //     setSearchResults([]);
-  //   }
-  // };
-
   useEffect(() => {
     setListPeliculasFilter(peliculaList);
-    // document.addEventListener("click", handleClickOutside);
-    // return () => {
-    //   document.removeEventListener("click", handleClickOutside);
-    // };
   }, []);
 
   //cerrando sesion
@@ -142,29 +126,6 @@ const CompNavbar = ({
                   value={searchTerm}
                   onChange={handleSearch}
                 />
-                {
-                  // searchResults.length > 0 && (
-                  //   <ul
-                  //     className="dropdown-menu"
-                  //     style={{
-                  //       display: "block",
-                  //       position: "absolute",
-                  //       top: "100%",
-                  //       left: 0,
-                  //       zIndex: 1000,
-                  //       minWidth: "100%",
-                  //     }}
-                  //   >
-                  //     {searchResults.map((pelicula, index) => (
-                  //       <li key={index}>
-                  //         <a className="dropdown-item" href="#">
-                  //           {pelicula.nombre}
-                  //         </a>
-                  //       </li>
-                  //     ))}
-                  //   </ul>
-                  // )
-                }
               </div>
             </form>
           )}
