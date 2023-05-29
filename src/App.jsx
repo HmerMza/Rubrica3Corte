@@ -7,7 +7,7 @@ import Home from "./views/Home";
 import Register from "./views/Register.jsx";
 import RegisterBook from "./views/RegisterBook.jsx";
 import EliminarLibros from "./views/EliminarLibros.jsx";
-import { Component, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { auth, db } from "./data/firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 import EditarLibro from "./views/EditarLibro";
@@ -24,6 +24,9 @@ function App() {
       try {
         await onSnapshot(collection(db, "libro"), (query) => {
           setListPeliculas(
+            query.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+          );
+          setListPeliculasFilter(
             query.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
           );
         });

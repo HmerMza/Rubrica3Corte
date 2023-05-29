@@ -34,10 +34,6 @@ const CompNavbar = ({
     };
   }, [searchTerm]);
 
-  useEffect(() => {
-    setListPeliculasFilter(peliculaList);
-  }, []);
-
   //cerrando sesion
   const handleLogout = () => {
     auth.signOut().then(() => {
