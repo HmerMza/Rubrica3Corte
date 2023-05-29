@@ -84,6 +84,58 @@ const CardBootstrap = ({
       }
     });
   };
+  const devolverLibro = () => {
+    Swal.fire({
+      title: "Seguro que desea devolver el libro?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si!",
+      cancelButtonText: "No",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const data = { ...dataUser };
+        data.L_Prestados = data.L_Prestados.filter((item) => item !== id);
+        const usuariosRef = collection(db, "usuario");
+        const q = query(usuariosRef, where("id", "==", dataUser.id));
+        //busco el libro
+        const getLibro = async () => {
+          try {
+            const libroDoc = await getDoc(doc(db, "libro", id));
+            if (libroDoc.exists()) {
+              await updateDoc(libroDoc.ref, { estado: true });
+            } else {
+              console.log("El libro no existe.");
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        getLibro();
+
+        try {
+          const querySnapshot = await getDocs(q);
+
+          if (querySnapshot.empty) {
+            console.log(
+              "No se encontraron documentos que coincidan con la consulta"
+            );
+            return;
+          }
+          querySnapshot.forEach((doc) => {
+            updateDoc(doc.ref, data)
+              .then(() => console.log("Documento actualizado con éxito"))
+              .catch((error) =>
+                console.error("Error al actualizar el documento:", error)
+              );
+          });
+        } catch (error) {
+          console.error("Error al ejecutar la consulta:", error);
+        }
+      }
+    });
+  };
 
   return (
     <div>
@@ -107,14 +159,27 @@ const CardBootstrap = ({
         </div>
         <div className="card-body" style={{ height: "102px" }}>
           <h5 className="card-title">{title}</h5>
-          <Button
-            variant="contained"
-            className="m-auto me-2 mb-2"
-            style={{ backgroundColor: "#6366f1" }}
-            onClick={prestarLibro}
-          >
-            Prestar
-          </Button>
+
+          {estado ? (
+            <Button
+              variant="contained"
+              className="m-auto me-2 mb-2"
+              style={{ backgroundColor: "#6366f1" }}
+              onClick={prestarLibro}
+            >
+              Prestar
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              className="m-auto me-2 mb-2"
+              style={{ backgroundColor: "#6366f1" }}
+              onClick={devolverLibro}
+            >
+              Devolver
+            </Button>
+          )}
+
           <Button
             variant="outlined"
             style={{
