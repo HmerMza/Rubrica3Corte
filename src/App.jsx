@@ -19,21 +19,31 @@ function App() {
   const [isSingIn, setIsSingIn] = useState();
   const [dataUser, setDataUser] = useState({});
 
+  const getBooks = async () => {
+    try {
+      await onSnapshot(collection(db, "libro"), (query) => {
+        if (isSingIn) {
+          const data = query.docs
+            .filter(
+              (doc) =>
+                dataUser.L_Prestados.includes(doc.id) || doc.data().estado
+            )
+            .map((doc) => ({ id: doc.id, ...doc.data() }));
+          console.log(data);
+          setListPeliculas(data);
+          setListPeliculasFilter(data);
+        } else {
+          const data = query.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+          setListPeliculas(data);
+          setListPeliculasFilter(data);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const getBooks = async () => {
-      try {
-        await onSnapshot(collection(db, "libro"), (query) => {
-          setListPeliculas(
-            query.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-          );
-          setListPeliculasFilter(
-            query.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-          );
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
     auth.onAuthStateChanged((user) => {
       if (user) {
         setIsSingIn(user.uid);
@@ -45,13 +55,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const getUser = async () => {
-      await onSnapshot(collection(db, "usuario"), (query) => {
+    const getUser = () => {
+      const userPromise = onSnapshot(collection(db, "usuario"), (query) => {
         const data = query.docs
           .map((doc) => ({ id: doc.id, ...doc.data() }))
           .find((user) => user.id === isSingIn);
         setDataUser(data);
       });
+      Promise.all([userPromise, getBooks]);
     };
     if (isSingIn) {
       getUser();

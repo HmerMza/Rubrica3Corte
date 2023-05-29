@@ -22,6 +22,7 @@ const CardBootstrap = ({
   autor = "autor",
   anho = "anho de publicacion",
   id = 0,
+  estado = true,
   dataUser,
 }) => {
   const [plibro, setPlibro] = useState(true);
