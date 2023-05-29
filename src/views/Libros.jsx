@@ -50,18 +50,22 @@ const Libros = ({ listPeliculas = [], firebaseUser, dataUser }) => {
 
       <div className="container">
         {firebaseUser &&
-          listPeliculas.map((p) => (
-            <CardBootstrap
-              key={p.id}
-              id={p.id}
-              title={p.nombre}
-              image={p.imagen}
-              description={p.descripcion}
-              autor={p.autor}
-              anho={p.fecha}
-              dataUser={dataUser}
-            />
-          ))}
+          listPeliculas.map((p) => {
+            if (p.estado) {
+              return (
+                <CardBootstrap
+                  key={p.id}
+                  id={p.id}
+                  title={p.nombre}
+                  image={p.imagen}
+                  description={p.descripcion}
+                  autor={p.autor}
+                  anho={p.fecha}
+                  dataUser={dataUser}
+                />
+              );
+            }
+          })}
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { db } from "../data/firebase";
 
@@ -24,6 +24,7 @@ const CardBootstrap = ({
   id = 0,
   dataUser,
 }) => {
+  const [plibro, setPlibro] = useState(true);
   const [show, setShow] = useState(true);
 
   const ocultar = () => {
@@ -45,6 +46,20 @@ const CardBootstrap = ({
         data.L_Prestados = [...dataUser.L_Prestados, id];
         const usuariosRef = collection(db, "usuario");
         const q = query(usuariosRef, where("id", "==", dataUser.id));
+        //busco el libro
+        const getLibro = async () => {
+          try {
+            const libroDoc = await getDoc(doc(db, "libro", id));
+            if (libroDoc.exists()) {
+              await updateDoc(libroDoc.ref, { estado: false });
+            } else {
+              console.log("El libro no existe.");
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        getLibro();
 
         try {
           const querySnapshot = await getDocs(q);
