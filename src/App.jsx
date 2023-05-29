@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./App.css";
 import CompNavbar from "./componentes/CompNavbar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -29,7 +30,6 @@ function App() {
                 dataUser.L_Prestados.includes(doc.id) || doc.data().estado
             )
             .map((doc) => ({ id: doc.id, ...doc.data() }));
-          console.log(data);
           setListPeliculas(data);
           setListPeliculasFilter(data);
         } else {

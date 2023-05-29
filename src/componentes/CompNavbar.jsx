@@ -27,7 +27,6 @@ const CompNavbar = ({
         libro.nombre.toLowerCase().includes(searchTerm.toLowerCase())
       );
       setListPeliculasFilter(filter.length > 0 ? filter : peliculaList);
-      console.log(filter.length > 0 ? filter : peliculaList);
     }, 1000);
     return () => {
       clearTimeout(timeout);
