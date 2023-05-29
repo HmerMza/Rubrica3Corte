@@ -23,20 +23,19 @@ function App() {
   const getBooks = async () => {
     try {
       await onSnapshot(collection(db, "libro"), (query) => {
+        let data;
         if (isSingIn) {
-          const data = query.docs
+          data = query.docs
             .filter(
               (doc) =>
                 dataUser.L_Prestados.includes(doc.id) || doc.data().estado
             )
             .map((doc) => ({ id: doc.id, ...doc.data() }));
-          setListPeliculas(data);
-          setListPeliculasFilter(data);
         } else {
-          const data = query.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-          setListPeliculas(data);
-          setListPeliculasFilter(data);
+          data = query.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         }
+        setListPeliculas(data);
+        setListPeliculasFilter(data);
       });
     } catch (error) {
       console.log(error);
@@ -50,8 +49,8 @@ function App() {
       } else {
         setIsSingIn(null);
       }
+      getBooks();
     });
-    getBooks();
   }, []);
 
   useEffect(() => {
@@ -83,10 +82,6 @@ function App() {
           dataUser={dataUser}
         />
       ),
-    },
-    {
-      path: "/login",
-      element: <ViewLogin />,
     },
     {
       path: "/register",
@@ -122,13 +117,8 @@ function App() {
             <Route path="/eliminar-book" element={<EliminarLibros />} />
           </>
         )}
-        {
-          /* 
-        agrega una vista para las controlar las rutas inexistente como un error 404 page not found
-        <Route path="*" element={<EliminarLibros />} /> 
-        */
-          <Route path="*" Component={NoteFound} />
-        }
+        {isSingIn && <Route path="/login" element={<ViewLogin />} />}
+        <Route path="*" Component={NoteFound} />
       </Routes>
     </BrowserRouter>
   );
