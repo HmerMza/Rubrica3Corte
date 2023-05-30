@@ -4,7 +4,7 @@ import CardBootstrap from "../componentes/CardBootstrap";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
-import DeleteIcon from "@mui/icons-material/Delete";
+import InventoryRoundedIcon from "@mui/icons-material/InventoryRounded";
 
 const Libros = ({ listPeliculas = [], firebaseUser, dataUser }) => {
   return (
@@ -34,7 +34,7 @@ const Libros = ({ listPeliculas = [], firebaseUser, dataUser }) => {
           <Link to="/Eliminar-book">
             <Button
               variant="outlined"
-              endIcon={<DeleteIcon />}
+              endIcon={<InventoryRoundedIcon />}
               style={{
                 borderColor: "#6366f1",
                 color: "#6366f1",

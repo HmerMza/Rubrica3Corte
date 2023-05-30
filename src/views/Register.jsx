@@ -5,6 +5,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { Button } from "@mui/material";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
 import PersonAddRoundedIcon from "@mui/icons-material/PersonAddRounded";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const history = useNavigate();
@@ -24,6 +25,16 @@ const Register = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    if (form.contrasena.length < 6) {
+      Swal.fire({
+        icon: "warning",
+        title: "Contraseña corta",
+        text: "La contraseña debe tener al menos 6 caracteres.",
+      });
+
+      return;
+    }
     registrar();
   };
 
@@ -53,9 +64,19 @@ const Register = () => {
       console.log(err.code);
       if (err.code === "auth/email-already-in-use") {
         console.log("email ya fue registrado");
+        Swal.fire({
+          icon: "error",
+          title: "Correo Registrado",
+          text: "Este correo ha sido registrado con anterioridad, por favor ingrese uno nuevo.",
+        });
       }
       if (err.code === "auth/invalid-email") {
         console.log("email no valido");
+        Swal.fire({
+          icon: "error",
+          title: "Correo no valido",
+          text: "Su correo no cuenta con las normas establecitas, intente de nuevo.",
+        });
       }
     }
   }, [form, history]);

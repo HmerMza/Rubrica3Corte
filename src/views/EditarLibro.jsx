@@ -37,6 +37,11 @@ const EditarLibro = () => {
           });
         } else {
           console.log("El libro no existe.");
+          Swal.fire({
+            icon: "error",
+            title: "Libro no encontrado",
+            text: "El libro no existe.",
+          });
         }
       } catch (error) {
         console.error(error);

@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, signInWithEmailAndPassword } from "../data/firebase";
 import { Button } from "@mui/material";
 import HowToRegRoundedIcon from "@mui/icons-material/HowToRegRounded";
+import Swal from "sweetalert2";
 
 const CompLogin = () => {
   const history = useNavigate();
@@ -37,9 +38,19 @@ const CompLogin = () => {
       console.log(err);
       if (err.code === "auth/user-not-found") {
         setError("Usuario no se encuentra registrado");
+        Swal.fire({
+          icon: "error",
+          title: "Correo no registrado",
+          text: "Su correo no se encuentra registrado.",
+        });
       }
-      if (error.code === "auth/wrong-password") {
+      if (err.code === "auth/wrong-password") {
         setError("contraseña no valida");
+        Swal.fire({
+          icon: "error",
+          title: "Contraseña incorrecta",
+          text: "La contraseña no es valida.",
+        });
       }
     }
   }, [email, password, history]);
