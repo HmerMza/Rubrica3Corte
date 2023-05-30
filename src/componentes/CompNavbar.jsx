@@ -108,9 +108,6 @@ const CompNavbar = ({
                       </IconButton>
                     </li>
                   </Link>
-                  <Link>
-                    <li className="dropdown-item">mis libros</li>
-                  </Link>
                 </ul>
               </li>
             )}

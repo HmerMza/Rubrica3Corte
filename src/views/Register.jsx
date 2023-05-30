@@ -59,6 +59,12 @@ const Register = () => {
         contrasena: "",
         L_Prestados: [],
       });
+      console.log("usuaruio creado");
+      Swal.fire({
+        icon: "Success",
+        title: "Usuario creado",
+        text: "Bienvenido, disfrute de su cuenta",
+      });
       history("/libros");
     } catch (err) {
       console.log(err.code);
