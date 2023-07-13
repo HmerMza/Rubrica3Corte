@@ -75,7 +75,7 @@ const CardBootstrap = ({
             updateDoc(doc.ref, data)
               .then(() => console.log("Documento actualizado con éxito"))
               .catch((error) =>
-                console.error("Error al actualizar el documento:", error)
+                console.error("Error al actualizar su documento:", error)
               );
           });
         } catch (error) {
